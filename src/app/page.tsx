@@ -1,103 +1,142 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import NoteGrid from '@/components/NoteGrid';
+import TulipField from '@/components/TulipField';
+import Tulip from '@/components/Tulip';
 
 export default function Home() {
+  const [showMessage, setShowMessage] = useState(true);
+  
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <main className="min-h-screen py-8 px-4 relative overflow-hidden">
+      {/* Background tulips - subtle and sparse */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
+        <TulipField 
+          count={10} 
+          distribution="scatter" 
+          heightClass="h-full" 
+          widthClass="w-full" 
+          zIndex={-1}
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      </div>
+      
+      {showMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95">
+          <div className="max-w-md w-full bg-paper p-8 rounded-lg shadow-notebook text-center relative">
+            {/* Individual decorative tulips instead of fields */}
+            <div className="absolute -top-12 -left-8 transform -rotate-15">
+              <Tulip color="pink" size="md" />
+            </div>
+            <div className="absolute -bottom-12 -right-8 transform rotate-5">
+              <Tulip color="purple" size="md" />
+            </div>
+            <div className="absolute top-1/2 -right-10 transform rotate-15">
+              <Tulip color="yellow" size="sm" />
+            </div>
+            
+            <h2 className="text-2xl font-cursive text-primary mb-4">Welcome!</h2>
+            <p className="handwritten mb-4">
+              I've gathered 100 reasons why I love you, Merriam. 
+              Each note is a piece of my heart, written just for you.
+            </p>
+            <div className="mb-4">
+              <span className="heart-icon text-4xl">❤</span>
+            </div>
+            <button 
+              onClick={() => setShowMessage(false)}
+              className="px-6 py-2 bg-primary text-white rounded-full shadow-md hover:bg-primary/90 transition-colors font-cursive"
+            >
+              Read My Notes
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="notebook-page mb-8 relative">
+          <div className="paper-fold"></div>
+          
+          {/* Individual tulips as decorative elements */}
+          <div className="absolute -top-14 -left-10 transform -rotate-10">
+            <Tulip color="pink" size="lg" />
+          </div>
+          
+          <div className="absolute -top-12 -right-10 transform rotate-5">
+            <Tulip color="blue" size="lg" />
+          </div>
+          
+          {/* Small tulips around the page */}
+          <div className="absolute top-10 -right-6 transform rotate-15">
+            <Tulip color="yellow" size="sm" />
+          </div>
+          
+          <div className="absolute top-20 -left-6 transform -rotate-5">
+            <Tulip color="purple" size="sm" />
+          </div>
+          
+          <header className="mb-8 relative">
+            <h1 className="page-title">
+              100 Reasons Why I Love Merriam
+            </h1>
+            <p className="text-center handwritten text-lg">
+              Every reason is a memory, a feeling, a moment that makes my heart skip a beat.
+            </p>
+          </header>
+          
+          <NoteGrid />
+          
+          {/* Decorative tulips around the content */}
+          <div className="absolute -bottom-14 -left-10 transform -rotate-5 animate-float">
+            <Tulip color="yellow" size="lg" />
+          </div>
+          
+          <div className="absolute -bottom-12 -right-10 transform rotate-10 animate-float-slow">
+            <Tulip color="pink" size="lg" />
+          </div>
+          
+          {/* Small group of tulips */}
+          <div className="absolute -bottom-8 left-1/4 transform -rotate-15">
+            <TulipField 
+              count={3} 
+              distribution="scatter" 
+              heightClass="h-20" 
+              widthClass="w-20"
+            />
+          </div>
+          
+          <div className="absolute -bottom-8 right-1/4 transform rotate-10">
+            <TulipField 
+              count={3} 
+              distribution="scatter" 
+              heightClass="h-20" 
+              widthClass="w-20"
+            />
+          </div>
+        </div>
+        
+        <footer className="text-center py-6 relative">
+          <p className="handwritten">
+            Made with <span className="heart-icon">❤</span> for Merriam
+          </p>
+          <p className="signature">
+            Created by Hashir with love
+          </p>
+          
+          {/* Simple tulip decorations for footer */}
+          <div className="flex justify-center mt-4 gap-6">
+            <div className="animate-float">
+              <Tulip color="pink" size="md" rotation={-5} />
+            </div>
+            <div className="animate-float-slow">
+              <Tulip color="purple" size="md" />
+            </div>
+            <div className="animate-float">
+              <Tulip color="yellow" size="md" rotation={5} />
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
   );
 }
