@@ -3,8 +3,8 @@
 import { FC } from 'react';
 
 interface TulipProps {
-  color?: 'pink' | 'yellow';
-  size?: 'sm' | 'md' | 'lg';
+  color?: 'pink' | 'yellow' | 'purple' | 'blue' | 'orange';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   rotation?: number;
   className?: string;
 }
@@ -25,10 +25,27 @@ const Tulip: FC<TulipProps> = ({
       flower: '#ffb7c5',
       stem: '#5a8d4e',
     },
+    purple: {
+      flower: '#d8b5ff',
+      stem: '#5a8d4e',
+    },
+    blue: {
+      flower: '#b5d0ff',
+      stem: '#5a8d4e',
+    },
+    orange: {
+      flower: '#ffcba5',
+      stem: '#5a8d4e',
+    }
   };
 
   // Define tulip sizes (pixels)
   const sizes = {
+    xs: {
+      flower: 16,
+      stem: 20,
+      leafWidth: 8,
+    },
     sm: {
       flower: 30,
       stem: 40,
@@ -65,7 +82,7 @@ const Tulip: FC<TulipProps> = ({
           position: 'absolute',
           bottom: 0,
           left: '50%',
-          width: '4px',
+          width: size === 'xs' ? '2px' : '4px',
           height: tulipSize.stem,
           backgroundColor: tulipColor.stem,
           transform: 'translateX(-50%)',

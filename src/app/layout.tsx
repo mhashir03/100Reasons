@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Indie_Flower, Caveat } from "next/font/google";
+import { Inter, Indie_Flower, Caveat, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,6 +21,12 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-dancing",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "100 Reasons | For Merriam",
   description: "A collection of 100 reasons why I love Merriam",
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${indieFlower.variable} ${caveat.variable} antialiased`}
+        className={`${inter.variable} ${indieFlower.variable} ${caveat.variable} ${dancingScript.variable} antialiased`}
       >
         {children}
       </body>

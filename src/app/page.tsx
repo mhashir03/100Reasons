@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import NoteGrid from '@/components/NoteGrid';
+import TulipField from '@/components/TulipField';
 
 export default function Home() {
   const [showMessage, setShowMessage] = useState(true);
@@ -13,8 +14,7 @@ export default function Home() {
           <div className="max-w-md w-full bg-paper p-8 rounded-lg shadow-notebook text-center relative">
             <h2 className="text-2xl font-cursive text-primary mb-4">Welcome!</h2>
             <p className="handwritten mb-4">
-              I've gathered 100 reasons why I love you, Merriam. 
-              Each note is a piece of my heart, written just for you.
+            I love you Merriam. Always have, always will.
             </p>
             <div className="mb-4">
               <span className="heart-icon text-4xl">❤</span>
@@ -25,6 +25,11 @@ export default function Home() {
             >
               Read My Notes
             </button>
+            
+            {/* Small tulip decoration in the modal */}
+            <div className="absolute bottom-2 w-full left-0 px-8 pointer-events-none overflow-hidden">
+              <TulipField density="low" className="opacity-60 modal-tulips" maxWidth={300} />
+            </div>
           </div>
         </div>
       )}
@@ -33,7 +38,12 @@ export default function Home() {
         <div className="notebook-page mb-8 relative">
           <div className="paper-fold"></div>
           
-          <header className="mb-8 relative">
+          {/* Top tulip border - contained inside notebook paper */}
+          <div className="w-full border-b border-transparent mb-6 pointer-events-none overflow-hidden px-8">
+            <TulipField density="medium" isStatic={true} />
+          </div>
+          
+          <header className="mb-8 relative z-10">
             <h1 className="page-title" spellCheck="false">
               100 Reasons Why I Love Merriam
             </h1>
@@ -43,6 +53,11 @@ export default function Home() {
           </header>
           
           <NoteGrid />
+          
+          {/* Bottom tulip border - contained inside notebook paper */}
+          <div className="w-full border-t border-transparent mt-8 pointer-events-none overflow-hidden px-8">
+            <TulipField density="medium" className="opacity-70" isStatic={true} />
+          </div>
         </div>
         
         <footer className="text-center py-6 relative">
