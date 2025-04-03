@@ -36,16 +36,16 @@ export default function Note({ note }: NoteProps) {
   // Custom styles for the sticky note - static during render
   const noteStyle = {
     transform: isMounted ? `rotate(${note.rotation}deg)` : 'rotate(0deg)',
-    transformStyle: 'preserve-3d' as 'preserve-3d',
+    transformStyle: 'preserve-3d' as const,
     transition: 'transform 0.6s',
     margin: '1.5rem 0.5rem',
     maxWidth: '100%',
     minHeight: '100px',
-    position: 'relative' as 'relative',
+    position: 'relative' as const,
     top: isMounted ? note.position?.top : '0',
     left: isMounted ? note.position?.left : '0',
     right: isMounted ? note.position?.right : '0',
-    '--rotation': `${note.id % 7 - 3}deg` as any // Deterministic based on note ID
+    '--rotation': `${note.id % 7 - 3}deg`
   };
   
   return (

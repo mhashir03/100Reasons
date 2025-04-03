@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import Note from './Note';
 import { createLoveNotes, LoveNote } from '@/utils/noteHelpers';
 
@@ -10,7 +10,7 @@ const staticNotes = createLoveNotes();
 export default function NoteGrid() {
   // Use the static notes to prevent hydration mismatches
   const [notes] = useState<LoveNote[]>(staticNotes);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   
   if (isLoading) {
     return (
