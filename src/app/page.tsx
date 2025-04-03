@@ -27,8 +27,8 @@ export default function Home() {
             </button>
             
             {/* Small tulip decoration in the modal */}
-            <div className="absolute bottom-2 w-full left-0 px-8 pointer-events-none overflow-hidden">
-              <TulipField density="low" className="opacity-60 modal-tulips" maxWidth={300} />
+            <div className="absolute bottom-2 w-full flex justify-center items-center pointer-events-none overflow-hidden">
+              <TulipField density="low" className="opacity-60 modal-tulips" maxWidth={300} isStatic={true} />
             </div>
           </div>
         </div>

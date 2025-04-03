@@ -1,19 +1,24 @@
 # Merriam - 100 Reasons
 
-A web application built with modern frontend technologies that displays 100 personalized messages in an interactive notebook-style interface.
+A beautifully crafted web application built with Next.js that displays 100 personalized love messages in an interactive notebook-style interface, decorated with colorful tulips.
 
 ## Project Overview
 
-This application presents 100 personalized notes in a visually appealing format. Each note contains a unique message that appears on customizable colorful notes in a responsive grid layout.
+This romantic digital gift presents 100 unique love notes in a visually appealing format. Each message appears on a colorful sticky note with realistic details like pins, paper clips, and tape. The application features a welcoming modal and decorative tulip elements created entirely with CSS.
 
 ## Key Features
 
-- **Interactive UI**: Responsive design with a welcome modal and scrollable content
-- **Custom Components**: 
-  - Note component with randomized colors and rotations
-  - Realistic tulip elements created with pure CSS/inline styles
-  - Animation effects on various elements
-- **Organized Data Structure**: Message content separated from presentation logic
+- **Welcoming Experience**: Beautiful welcome modal with personalized message and centered tulip decorations
+- **Interactive UI**: Responsive design with smooth transitions and a scrollable notebook layout
+- **Customized Components**: 
+  - Sticky notes with randomized colors, rotations, and attachment styles
+  - Realistic tulip decorations created purely with CSS/inline styles
+  - Heart icons and handwritten-style typography
+- **Visual Details**:
+  - Notebook paper aesthetic with decorative elements
+  - Tulip fields at top and bottom of the content
+  - Varied note colors and positions for a realistic scatter effect
+- **Responsive Design**: Optimized experience across desktop and mobile devices
 
 ## Technical Implementation
 
@@ -21,26 +26,30 @@ This application presents 100 personalized notes in a visually appealing format.
 - **Next.js 14**: Utilizing the App Router architecture
 - **TypeScript**: For type safety and improved developer experience
 - **Tailwind CSS**: For responsive styling and design system
-- **React Hooks**: State management with useState for modal control
+- **React Hooks**: State management with useState for modal control and component state
 - **CSS Animations**: Custom keyframe animations for interactive elements
 
 ### Component Architecture
 - **Main Page**: Container with welcome modal and content grid
-- **NoteGrid**: Responsive grid system for displaying notes
-- **Note**: Individual note with customizable appearance
-- **Tulip/TulipField**: Custom decorative components with parameter-based styling
+- **NoteGrid**: Responsive grid system for displaying the love notes
+- **Note**: Individual note component with customizable appearance and attachment styles
+- **Tulip/TulipField**: Decorative flower components with parameter-based styling
+  - Static rendering to prevent mobile glitching
+  - Customizable density and positioning
 
 ### Performance Considerations
-- Web fonts properly configured with next/font
+- Static component optimization to prevent layout shifts
 - Component-based architecture for better code organization
 - Pointer events management to ensure UI responsiveness
 - Z-index layering for proper element stacking
+- Fixed mobile-specific issues (such as tulip rendering)
 
 ### Styling Approach
 - Custom color palette defined in Tailwind config
 - Mix of utility classes and CSS modules
 - Custom animations using keyframes
 - Responsive design with mobile-first approach
+- Paper-like textures and realistic design elements
 
 ## Getting Started
 
@@ -57,7 +66,7 @@ Want to create your own version of this special gift? Follow these steps to cust
 1. Clone this repository:
    ```bash
    git clone https://github.com/mhashir03/100Reasons.git
-   cd reasons-project
+   cd 100Reasons
    ```
 
 2. Install dependencies:
@@ -111,7 +120,19 @@ Want to create your own version of this special gift? Follow these steps to cust
 2. Adjust the tulip colors in `src/components/Tulip.tsx`:
    ```typescript
    const colors = {
-     // Change these HEX values for different flower colors
+     yellow: { flower: '#fff77d', stem: '#5a8d4e' },
+     pink: { flower: '#ffb7c5', stem: '#5a8d4e' },
+     // Add or modify colors...
+   };
+   ```
+
+3. Customize the note styles in `src/components/Note.tsx`:
+   ```typescript
+   const getVariantClass = () => {
+     switch (note.variant) {
+       case 'pink': return 'sticky-note-pink';
+       // Add or modify variants...
+     }
    };
    ```
 
@@ -139,20 +160,24 @@ To share your creation with your loved one:
 ```
 src/
 ├── app/              # App router components
-│   ├── page.tsx      # Main page component
+│   ├── page.tsx      # Main page with welcome modal and content
 │   ├── layout.tsx    # Root layout with metadata
-│   └── globals.css   # Global styles
+│   └── globals.css   # Global styles and animations
 ├── components/       # Reusable UI components
-│   ├── Note.tsx      # Individual note display
+│   ├── Note.tsx      # Individual note display with attachment styles
 │   ├── NoteGrid.tsx  # Grid layout for notes
-│   ├── Tulip.tsx     # Decorative flower component
-│   └── TulipField.tsx # Grouped tulip elements
+│   ├── Tulip.tsx     # Individual flower component
+│   └── TulipField.tsx # Grouped tulip elements with static rendering
+├── utils/            # Helper utilities
+│   └── noteHelpers.ts # Functions for note generation and styling
 └── data/             # Application data
-    └── reasons.ts    # Array of 100 personalized messages
+    └── reasons.ts    # Array of 100 personalized love messages
 ```
 
 ## Personal Note
 
-Created for Merriam, featuring 100 personalized messages. The design includes tulip decorations throughout and a notebook aesthetic to create a unique digital gift.
+Merriam,
+
+Building this website was a lot of fun, and it really brought back a lot of memories. 100 reasons aren't enough to show how much I really do love you. Placing tulips around the website built with CSS entirely was a little tricky, but I learned a lot nonetheless. Each message on each note carries a piece of my heart and memories we have shared that won't ever be forgotten, so I decided to solidify them into the World Wide Web. Just like the tulips I have placed throughout, my love for you continues to grow with each passing day. Love you forever.
 
 ~ Hashir
