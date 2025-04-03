@@ -1,23 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Note from './Note';
 import { createLoveNotes, LoveNote } from '@/utils/noteHelpers';
 
+// Create notes outside of component to ensure consistent server/client rendering
+const staticNotes = createLoveNotes();
+
 export default function NoteGrid() {
-  const [notes, setNotes] = useState<LoveNote[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-    // Create the love notes with a small delay for a nicer loading effect
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setNotes(createLoveNotes());
-      setIsLoading(false);
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  // Use the static notes to prevent hydration mismatches
+  const [notes] = useState<LoveNote[]>(staticNotes);
+  const [isLoading, setIsLoading] = useState(false);
   
   if (isLoading) {
     return (
@@ -31,7 +24,7 @@ export default function NoteGrid() {
   }
   
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2">
       {notes.map((note) => (
         <Note key={note.id} note={note} />
       ))}

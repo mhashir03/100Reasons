@@ -1,191 +1,115 @@
 'use client';
 
-import React from 'react';
+import { FC } from 'react';
 
 interface TulipProps {
-  color?: 'pink' | 'purple' | 'yellow' | 'blue';
+  color?: 'pink' | 'yellow';
   size?: 'sm' | 'md' | 'lg';
   rotation?: number;
   className?: string;
 }
 
-const Tulip: React.FC<TulipProps> = ({ 
-  color = 'pink',
-  size = 'md',
+const Tulip: FC<TulipProps> = ({ 
+  color = 'yellow', 
+  size = 'md', 
   rotation = 0,
-  className = ''
+  className = '',
 }) => {
+  // Define the tulip colors
   const colors = {
-    pink: {
-      flower: '#f8a5c2',
-      flowerDark: '#e5829e',
-      stem: '#68a968',
-      leaf: '#89c389'
-    },
-    purple: {
-      flower: '#c3aed6',
-      flowerDark: '#a18cbd',
-      stem: '#68a968',
-      leaf: '#89c389'
-    },
     yellow: {
-      flower: '#f7e3a0',
-      flowerDark: '#e5cc70',
-      stem: '#68a968',
-      leaf: '#89c389'
+      flower: '#fff77d',
+      stem: '#5a8d4e',
     },
-    blue: {
-      flower: '#a6cef7',
-      flowerDark: '#7baae3',
-      stem: '#68a968',
-      leaf: '#89c389'
-    }
+    pink: {
+      flower: '#ffb7c5',
+      stem: '#5a8d4e',
+    },
   };
 
+  // Define tulip sizes (pixels)
   const sizes = {
     sm: {
-      flower: 12,
-      stem: 2,
-      height: 40
+      flower: 30,
+      stem: 40,
+      leafWidth: 15,
     },
     md: {
-      flower: 16,
-      stem: 2.5,
-      height: 60
+      flower: 45,
+      stem: 60,
+      leafWidth: 20,
     },
     lg: {
-      flower: 20,
-      stem: 3,
-      height: 80
-    }
+      flower: 60,
+      stem: 80,
+      leafWidth: 25,
+    },
   };
 
-  const { flower: flowerColor, flowerDark, stem: stemColor, leaf: leafColor } = colors[color];
-  const { flower: flowerSize, stem: stemSize, height } = sizes[size];
+  const tulipColor = colors[color];
+  const tulipSize = sizes[size];
 
   return (
     <div 
-      className={`relative inline-block ${className}`} 
+      className={`relative inline-block ${className}`}
       style={{ 
-        height: `${height}px`, 
-        width: `${flowerSize * 2.5}px`,
-        transform: `rotate(${rotation}deg)`
+        transform: `rotate(${rotation}deg)`,
+        width: tulipSize.flower,
+        height: tulipSize.flower + tulipSize.stem,
+        transformOrigin: 'bottom center',
       }}
     >
-      {/* Stem with curve */}
-      <div
-        className="absolute"
-        style={{
-          backgroundColor: 'transparent',
-          bottom: '0',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: `${stemSize}px`,
-          height: `${height - flowerSize * 1.8}px`,
-          background: `linear-gradient(to right, transparent 45%, ${stemColor} 45%, ${stemColor} 55%, transparent 55%)`,
-          borderRadius: '50%',
-        }}
-      />
-      
-      {/* Leaf 1 */}
+      {/* Stem */}
       <div 
         style={{
           position: 'absolute',
-          backgroundColor: leafColor,
-          height: `${flowerSize * 0.6}px`,
-          width: `${flowerSize * 1.2}px`,
-          bottom: `${height / 2.5}px`,
-          left: `calc(50% - ${flowerSize * 0.3}px)`,
-          borderRadius: '50% 50% 0 50%',
-          transform: 'rotate(-20deg)',
-          boxShadow: `inset 1px 1px 1px rgba(255,255,255,0.3), inset -1px -1px 1px rgba(0,0,0,0.1)`
+          bottom: 0,
+          left: '50%',
+          width: '4px',
+          height: tulipSize.stem,
+          backgroundColor: tulipColor.stem,
+          transform: 'translateX(-50%)',
         }}
       />
       
-      {/* Leaf 2 - smaller leaf on opposite side */}
+      {/* Leaf */}
       <div 
         style={{
           position: 'absolute',
-          backgroundColor: leafColor,
-          height: `${flowerSize * 0.5}px`,
-          width: `${flowerSize * 0.8}px`,
-          bottom: `${height / 3}px`,
-          right: `calc(50% - ${flowerSize * 0.3}px)`,
-          borderRadius: '50% 50% 50% 0',
-          transform: 'rotate(20deg)',
-          boxShadow: `inset 1px 1px 1px rgba(255,255,255,0.3), inset -1px -1px 1px rgba(0,0,0,0.1)`
+          bottom: tulipSize.stem * 0.4,
+          right: '50%',
+          width: tulipSize.leafWidth,
+          height: tulipSize.leafWidth / 2,
+          backgroundColor: tulipColor.stem,
+          borderTopLeftRadius: '50%',
+          borderBottomLeftRadius: '50%',
+          transform: 'rotate(-15deg)',
         }}
       />
       
-      {/* Tulip cup base */}
+      {/* Flower */}
       <div
         style={{
           position: 'absolute',
-          top: '0',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: `${flowerSize * 1.6}px`,
-          height: `${flowerSize * 0.5}px`,
-          backgroundColor: flowerDark,
-          borderRadius: '0 0 40% 40%',
-          zIndex: 2
-        }}
-      />
-      
-      {/* Flower Petals Group */}
-      <div
-        className="absolute"
-        style={{
-          width: `${flowerSize * 2.5}px`,
-          height: `${flowerSize * 2.2}px`,
-          top: '0',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 1
+          bottom: tulipSize.stem,
+          left: 0,
+          width: tulipSize.flower,
+          height: tulipSize.flower,
         }}
       >
-        {/* Petal 1 - Left */}
-        <div
+        {/* Petals */}
+        <div 
           style={{
             position: 'absolute',
-            backgroundColor: flowerColor,
-            width: `${flowerSize * 1.2}px`,
-            height: `${flowerSize * 2}px`,
-            left: '0',
-            top: '0',
-            borderRadius: '70% 30% 70% 30%',
-            transform: 'rotate(-5deg)',
-            boxShadow: `inset 2px 2px 5px rgba(255,255,255,0.4), inset -2px -2px 5px rgba(0,0,0,0.1)`
-          }}
-        />
-        
-        {/* Petal 2 - Center */}
-        <div
-          style={{
-            position: 'absolute',
-            backgroundColor: flowerColor,
-            width: `${flowerSize * 1.2}px`,
-            height: `${flowerSize * 2.2}px`,
-            left: '50%',
-            top: '0',
-            transform: 'translateX(-50%)',
-            borderRadius: '60% 60% 40% 40%',
-            boxShadow: `inset 2px 0 5px rgba(255,255,255,0.4), inset -2px -2px 5px rgba(0,0,0,0.1)`
-          }}
-        />
-        
-        {/* Petal 3 - Right */}
-        <div
-          style={{
-            position: 'absolute',
-            backgroundColor: flowerColor,
-            width: `${flowerSize * 1.2}px`,
-            height: `${flowerSize * 2}px`,
-            right: '0',
-            top: '0',
-            borderRadius: '30% 70% 30% 70%',
-            transform: 'rotate(5deg)',
-            boxShadow: `inset -2px 2px 5px rgba(255,255,255,0.4), inset 2px -2px 5px rgba(0,0,0,0.1)`
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: tulipColor.flower,
+            borderTopLeftRadius: '60%',
+            borderTopRightRadius: '60%',
+            borderBottomLeftRadius: '10%',
+            borderBottomRightRadius: '10%',
           }}
         />
       </div>

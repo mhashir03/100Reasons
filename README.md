@@ -56,7 +56,7 @@ Want to create your own version of this special gift? Follow these steps to cust
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/reasons-project.git
+   git clone https://github.com/mhashir03/100Reasons.git
    cd reasons-project
    ```
 
