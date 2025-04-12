@@ -173,11 +173,3 @@ src/
 └── data/             # Application data
     └── reasons.ts    # Array of 100 personalized love messages
 ```
-
-## Personal Note
-
-Merriam,
-
-Building this website was a lot of fun, and it really brought back a lot of memories. 100 reasons aren't enough to show how much I really do love you. Placing tulips around the website built with CSS entirely was a little tricky, but I learned a lot nonetheless. Each message on each note carries a piece of my heart and memories we have shared that won't ever be forgotten, so I decided to solidify them into the World Wide Web. Just like the tulips I have placed throughout, my love for you continues to grow with each passing day. Love you forever.
-
-~ Hashir
