@@ -1,4 +1,4 @@
-# Merriam - 100 Reasons
+# 100 Reasons
 
 A beautifully crafted web application built with Next.js that displays 100 personalized love messages in an interactive notebook-style interface, decorated with colorful tulips.
 
